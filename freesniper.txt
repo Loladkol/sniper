@@ -92,17 +92,15 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     }
     
 
-    
-    
-    local success,errorm = pcall(function()
-        local http = game:GetService("HttpService")
-        local jsonMessage = http:JSONEncode(message)
-        http:PostAsync(
-            webhookUrl,
-            jsonMessage,
-            Enum.HttpContentType.ApplicationJson
-        )
-    end)
+    local http = game:GetService("HttpService")
+    local jsonMessage = http:JSONEncode(message)
+
+
+    http:PostAsync(
+        webhookUrl,
+        jsonMessage,
+        Enum.HttpContentType.ApplicationJson
+    )
 
     if not success then
         print("Error sending webhook: ", errorm)
@@ -124,14 +122,10 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
 	if typepet.exclusiveLevel and gems <= 50000 and class == "Pet" then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
-    end
-    
-    if typepet.huge and gems <= 2500000 then
+    elseif typepet.huge and gems <= 2500000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
-    end
-    
-    if typepet.titanic and gems <= 100000000 then
+    elseif typepet.titanic and gems <= 100000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
     end
