@@ -47,6 +47,8 @@ end)
     elseif type.titanic and gems <= 100000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
     end
+
+    print("item:", item)
 end
 
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
