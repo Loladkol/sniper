@@ -31,16 +31,20 @@ end
 
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid, class)
     gems = tonumber(gems)
-    local typepet = {}
+    local type = {}
     pcall(function()
-        typepet = Library.Directory.Pets[item]
-    end)
-	
-	if typepet.exclusiveLevel and gems <= 50000 and class == "Pet" then
+        type = Library.Directory.Pets[item]
+end)
+
+    if type.exclusiveLevel and gems <= 50000 and class == "Pet" then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-    elseif typepet.huge and gems <= 2500000 then
+    elseif item == "Titanic Christmas Present" and gems <= 100000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-    elseif typepet.titanic and gems <= 100000000 then
+    elseif string.find(item, "Charm") and gems <= 1000 then
+        game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+    elseif type.huge and gems <= 2500000 then
+        game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+    elseif type.titanic and gems <= 100000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
     end
 end
