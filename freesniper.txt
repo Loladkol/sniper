@@ -1,5 +1,6 @@
 local Booths_Broadcast = game:GetService("ReplicatedStorage").Network:WaitForChild("Booths_Broadcast")
 local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
+game:GetService("RunService"):Set3dRenderingEnabled(false)
 
 if not getgenv().a then
     getgenv().a = true
